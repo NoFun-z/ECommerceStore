@@ -13,6 +13,7 @@ export default function AppDropzone(props: Props) {
         display: 'flex',
         border: 'dashed 3px #eee',
         borderColor: '#eee',
+        borderRadius: '5px',
         paddingTop: '30px',
         alignItems: 'center',
         height: 200,

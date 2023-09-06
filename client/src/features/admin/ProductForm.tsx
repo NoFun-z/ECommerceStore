@@ -1,5 +1,5 @@
 import { Typography, Grid, Paper, Box, Button } from "@mui/material";
-import { FieldValue, FieldValues, useForm } from "react-hook-form";
+import { FieldValues, useForm } from "react-hook-form";
 import { Product } from "../../app/models/product";
 import { useEffect } from "react";
 import useProducts from "../../app/hooks/useProduct";
