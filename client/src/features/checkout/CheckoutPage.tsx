@@ -117,7 +117,7 @@ export default function CheckoutPage() {
     };
 
     function submitDisabled(): boolean {
-        if (activeStep === steps.length - 1) {
+        if (activeStep === 2) {
             return !cardComplete.cardCVC
                 || !cardComplete.cardExpiry
                 || !cardComplete.cardNumber

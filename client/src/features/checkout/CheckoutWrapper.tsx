@@ -7,7 +7,7 @@ import agent from "../../app/api/agent";
 import { setBasket } from "../basket/basketSlice";
 import LoadingComponent from "../../app/layout/LoadingComponent";
 
-const stripePromise = loadStripe("pk_test_51Nh1mCHFwT6dWdaERBtGS7Zhj5On1ZcQjYChd6yhecZ6DGpyrox3OlBqIQDIxxttIinRLIrDBOuvU1RGlVudyiOS00fhbmkeNE")
+const stripePromise = loadStripe("pk_test_51Nh1l5BYQAopjhAKGQrmQ4MnPROp6o8JtMcUNVfJM07CXJ4RoNgzzCxuLxtu5WnEW7r0RatHGxNGuoqjghjUG0Nn00K1yX6yuy")
 
 export default function CheckoutWrapper() {
     const dispatch = useAppDispatch();

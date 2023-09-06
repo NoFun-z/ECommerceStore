@@ -1,13 +1,12 @@
 import { Button, Grid, Typography } from "@mui/material";
 import BasketSummary from "./BasketSummary";
 import { Link } from "react-router-dom";
-import { useAppDispatch, useAppSelector } from "../../app/store/ConfigureStore";
+import {useAppSelector } from "../../app/store/ConfigureStore";
 import BasketTable from "./BasketTable";
 
 export default function BasketPage() {
 
   const { basket } = useAppSelector(state => state.basket);
-  const dispatch = useAppDispatch();
 
 
   if (!basket) return <Typography variant="h3">Your basket is empty</Typography>

@@ -36,7 +36,7 @@ namespace API.Services
             {
                 var options = new PaymentIntentUpdateOptions
                 {
-                    Amount = subtotal + deliveryFee
+                    Amount = subtotal + (subtotal / 100 * 15) + deliveryFee
                 };
                 await service.UpdateAsync(basket.PaymentIntentID, options);
             }

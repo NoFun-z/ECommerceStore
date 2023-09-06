@@ -10,6 +10,7 @@ interface Props {
 }
 
 export default function BasketTable({ items, isBasket = true }: Props) {
+    const {status} = useAppSelector(state => state.basket);
     const dispatch = useAppDispatch();
     return (
         <TableContainer component={Paper}>
