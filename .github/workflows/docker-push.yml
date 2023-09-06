@@ -28,7 +28,7 @@ jobs:
           context: "{{defaultContext}}:API"
           push: true
           tags: hoangloc1511/ecomreact:latest
-  # deploy:
+  # deploy:API/.github
   #   needs: docker
   #   name: Deploy app
   #   runs-on: ubuntu-latest
