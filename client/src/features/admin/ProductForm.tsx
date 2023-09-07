@@ -26,7 +26,7 @@ export default function ProductForm({ product, cancelEdit }: Props) {
     const dispatch = useAppDispatch();
 
     useEffect(() => {
-        if (product && !watchFile) reset(product);
+        if (product && !watchFile && !isDirty) reset(product);
         return () => {
             if (watchFile) URL.revokeObjectURL(watchFile.preview)
         }

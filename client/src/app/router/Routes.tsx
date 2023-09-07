@@ -24,8 +24,7 @@ export const router = createBrowserRouter([
             {
                 element: <RequireAuth />, children: [
                     { path: 'checkout', element: <CheckoutWrapper /> },
-                    { path: 'orders', element: <Orders /> },
-                    { path: 'inventory', element: <Inventory /> }
+                    { path: 'orders', element: <Orders /> }
                 ]
             },
             // Admin routes
