@@ -20,7 +20,7 @@ export default function CheckoutPage() {
     const [loading, setLoading] = useState(false);
     const dispatch = useAppDispatch();
     const [cardState, setCardState] = useState<{ elementError: { [key in StripeElementType]?: string } }>({ elementError: {} });
-    const [cardComplete, setCardComplete] = useState<any>({ cardNumber: false, cardExpiry: false, cardCVC: false })
+    const [cardComplete, setCardComplete] = useState<any>({ cardNumber: false, cardExpiry: false, cardCvc: false })
     const [paymentMessage, setPaymentMessage] = useState('');
     const [paymentSucceeded, setPaymentSucceeded] = useState(false);
     const { basket } = useAppSelector(state => state.basket);
@@ -117,8 +117,8 @@ export default function CheckoutPage() {
     };
 
     function submitDisabled(): boolean {
-        if (activeStep === 2) {
-            return !cardComplete.cardCVC
+        if (activeStep === steps.length - 1) {
+            return !cardComplete.cardCvc
                 || !cardComplete.cardExpiry
                 || !cardComplete.cardNumber
                 || !methods.formState.isValid
