@@ -22,12 +22,16 @@ export default function BasketSummary({ subtotal }: Props) {
                             <TableCell align="right">{currencyFormat(subtotal)}</TableCell>
                         </TableRow>
                         <TableRow>
+                            <TableCell colSpan={2}>HST - 15%</TableCell>
+                            <TableCell align="right">{currencyFormat(subtotal / 100 * 15)}</TableCell>
+                        </TableRow>
+                        <TableRow>
                             <TableCell colSpan={2}>Delivery fee*</TableCell>
                             <TableCell align="right">{currencyFormat(deliveryFee)}</TableCell>
                         </TableRow>
                         <TableRow>
                             <TableCell colSpan={2}>Total</TableCell>
-                            <TableCell align="right">{currencyFormat(subtotal + deliveryFee)}</TableCell>
+                            <TableCell align="right">{currencyFormat(subtotal + (subtotal / 100 * 15) + deliveryFee)}</TableCell>
                         </TableRow>
                         <TableRow>
                             <TableCell>

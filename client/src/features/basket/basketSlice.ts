@@ -15,12 +15,12 @@ const initialState: BasketState = {
 
 export const fetchBasketAsync = createAsyncThunk<Basket>(
     'basket/fetchBasketAsync',
-    async(_, thunkAPI) => {
-        try{
+    async (_, thunkAPI) => {
+        try {
             return await agent.Basket.get();
         }
-        catch (er: any){
-            return thunkAPI.rejectWithValue({error: er.data})
+        catch (er: any) {
+            return thunkAPI.rejectWithValue({ error: er.data })
         }
     },
     {
@@ -32,22 +32,22 @@ export const fetchBasketAsync = createAsyncThunk<Basket>(
 
 export const addBasketItemAsync = createAsyncThunk<Basket, { productId: number, quantity?: number }>(
     'basket/addBasketItemAsync',
-    async ({ productId, quantity = 1}, thunkAPI) => {
+    async ({ productId, quantity = 1 }, thunkAPI) => {
         try {
             return await agent.Basket.addItem(productId, quantity)
         } catch (er: any) {
-            return thunkAPI.rejectWithValue({error: er.data})
+            return thunkAPI.rejectWithValue({ error: er.data })
         }
     }
 );
 
 export const removeBasketItemAsync = createAsyncThunk<void, { productId: number, quantity: number, name?: string }>(
     'basket/removeBasketItemAsync',
-    async ({ productId, quantity}, thunkAPI) => {
+    async ({ productId, quantity }, thunkAPI) => {
         try {
             await agent.Basket.removeItem(productId, quantity)
         } catch (er: any) {
-            return thunkAPI.rejectWithValue({error: er.data})
+            return thunkAPI.rejectWithValue({ error: er.data })
         }
     }
 );

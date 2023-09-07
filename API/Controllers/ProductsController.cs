@@ -91,7 +91,7 @@ namespace API.Controllers
 
         [Authorize(Roles = "Admin")]
         [HttpPut]
-        public async Task<ActionResult> UpdateProduct([FromForm] UpdateProductDTO productDTO)
+        public async Task<ActionResult<Product>> UpdateProduct([FromForm] UpdateProductDTO productDTO)
         {
             var product = await _context.Products.FindAsync(productDTO.ID);
 
@@ -123,10 +123,10 @@ namespace API.Controllers
         }
 
         [Authorize(Roles = "Admin")]
-        [HttpDelete]
-        public async Task<ActionResult> DeleteProduct(int Id)
+        [HttpDelete("{id}")]
+        public async Task<ActionResult> DeleteProduct(int id)
         {
-            var product = await _context.Products.FindAsync(Id);
+            var product = await _context.Products.FindAsync(id);
 
             if (product == null) return NotFound();
 
