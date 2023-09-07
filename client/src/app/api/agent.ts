@@ -84,9 +84,9 @@ const Admin = {
 
 
 const Catalog = {
-    list: (params: URLSearchParams) => requests.get('Products', params),
-    details: (id: number) => requests.get(`Products/${id}`),
-    fetchFilters: () => requests.get('Products/filters')
+    list: (params: URLSearchParams) => requests.get('products', params),
+    details: (id: number) => requests.get(`products/${id}`),
+    fetchFilters: () => requests.get('products/filters')
 }
 
 const TestErrors = {
