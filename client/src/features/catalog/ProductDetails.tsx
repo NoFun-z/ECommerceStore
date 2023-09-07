@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 import NotFound from "../../app/errors/NotFound";
 import LoadingComponent from "../../app/layout/LoadingComponent";
 import { useAppDispatch, useAppSelector } from "../../app/store/ConfigureStore";
-import { addBasketItemAsync, removeBasketItemAsync, setBasket } from "../basket/basketSlice";
+import { addBasketItemAsync, removeBasketItemAsync} from "../basket/basketSlice";
 import { fetchProductAsync, productSelector } from "./catalogSlice";
 
 export default function ProductDetails() {
