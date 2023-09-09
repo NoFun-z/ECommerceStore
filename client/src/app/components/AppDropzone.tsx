@@ -24,7 +24,7 @@ export default function AppDropzone(props: Props) {
         borderColor: 'green'
     }
 
-    const onDrop = useCallback((acceptedFiles: any[]) => {
+    const onDrop = useCallback((acceptedFiles: any) => {
         acceptedFiles[0] = Object.assign(acceptedFiles[0], { preview: URL.createObjectURL(acceptedFiles[0]) });
         field.onChange(acceptedFiles[0]);
     }, [field])

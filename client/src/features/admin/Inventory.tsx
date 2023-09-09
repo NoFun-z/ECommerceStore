@@ -69,7 +69,7 @@ export default function Inventory() {
                                 </TableCell>
                                 <TableCell align="left">
                                     <Box display='flex' alignItems='center'>
-                                        <img src={product.pictureUrl} alt={product.name} style={{ height: 50, marginRight: 20 }} />
+                                        <img src={product.pictureURL} alt={product.name} style={{ height: 50, marginRight: 20 }} />
                                         <span>{product.name}</span>
                                     </Box>
                                 </TableCell>

@@ -27,12 +27,12 @@ export default function BasketTable({ items, isBasket = true }: Props) {
                 <TableBody>
                     {items?.map((row) => (
                         <TableRow
-                            key={row.productId}
+                            key={row.productID}
                             sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                         >
                             <TableCell component="th" scope="row">
                                 <Box display='flex' alignItems='center'>
-                                    <img src={row.pictureUrl} alt={row.name} style={{ height: 50, marginRight: 20 }} />
+                                    <img src={row.pictureURL} alt={row.name} style={{ height: 50, marginRight: 20 }} />
                                     <span>{row.name}</span>
                                 </Box>
                             </TableCell>
@@ -41,7 +41,7 @@ export default function BasketTable({ items, isBasket = true }: Props) {
                                 {isBasket &&
                                     <Button
                                         // loading={status === ('pendingRemoveItem' + item.productId + 'rem')}
-                                        onClick={() => dispatch(removeBasketItemAsync({ productId: row.productId, quantity: 1, name: 'rem' }))}
+                                        onClick={() => dispatch(removeBasketItemAsync({ productId: row.productID, quantity: 1, name: 'rem' }))}
                                         color='error'>
                                         <Remove />
                                     </Button>}
@@ -49,7 +49,7 @@ export default function BasketTable({ items, isBasket = true }: Props) {
                                 {isBasket &&
                                     <Button
                                         // loading={status === ('pendingAddItem' + row.productId)}
-                                        onClick={() => dispatch(addBasketItemAsync({ productId: row.productId }))}
+                                        onClick={() => dispatch(addBasketItemAsync({ productId: row.productID }))}
                                         color='secondary'>
                                         <Add />
                                     </Button>}
@@ -59,7 +59,7 @@ export default function BasketTable({ items, isBasket = true }: Props) {
                                 <TableCell align="right">
                                     <Button
                                         //loading={status === ('pendingRemoveItem' + row.productId + 'del')}
-                                        onClick={() => dispatch(removeBasketItemAsync({ productId: row.productId, quantity: row.quantity, name: 'del' }))}
+                                        onClick={() => dispatch(removeBasketItemAsync({ productId: row.productID, quantity: row.quantity, name: 'del' }))}
                                         color='error'>
                                         <Delete />
                                     </Button>

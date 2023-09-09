@@ -18,9 +18,10 @@ interface Props {
 }
 
 export default function ProductForm({ product, cancelEdit }: Props) {
-    const { control, reset, handleSubmit, watch, formState: {isDirty, isSubmitting} } = useForm({
-        resolver: yupResolver<any>(validationSchema)
+    const { control, reset, handleSubmit, watch, formState: { isDirty, isSubmitting} } = useForm({
+        resolver: yupResolver(validationSchema) as any
     });
+
     const { brands, types } = useProducts();
     const watchFile = watch('file', null);
     const dispatch = useAppDispatch();
@@ -33,7 +34,7 @@ export default function ProductForm({ product, cancelEdit }: Props) {
     }, [product, reset, watchFile, isDirty])
 
     async function handleSubmitData(data: FieldValues) {
-        try{
+        try {
             let response: Product;
             if (product) {
                 response = await agent.Admin.updateProduct(data);
@@ -43,7 +44,7 @@ export default function ProductForm({ product, cancelEdit }: Props) {
             }
             dispatch(setProduct(response));
             cancelEdit();
-        }catch (er){
+        } catch (er) {
             console.log(er)
         }
     }
@@ -79,7 +80,7 @@ export default function ProductForm({ product, cancelEdit }: Props) {
                             {watchFile ? (
                                 <img src={watchFile.preview} alt="preview" style={{ maxHeight: 200 }} />
                             ) : (
-                                <img src={product?.pictureUrl} alt={product?.name} style={{ maxHeight: 200 }} />
+                                <img src={product?.pictureURL} alt={product?.name} style={{ maxHeight: 200 }} />
                             )}
                         </Box>
                     </Grid>

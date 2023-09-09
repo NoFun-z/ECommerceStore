@@ -1,16 +1,16 @@
 export interface Basket {
     id: number
-    buyerId: string
+    buyerID: string
     items: BasketItem[],
-    paymentIntentId?: string,
+    paymentIntentID?: string,
     clientSecret?: string
   }
   
   export interface BasketItem {
-    productId: number
+    productID: number
     name: string
     price: number
-    pictureUrl: string
+    pictureURL: string
     brand: string
     type: string
     quantity: number

@@ -14,7 +14,7 @@ export default function ProductDetails() {
     const product = useAppSelector(state => productSelector.selectById(state, id!));
     const {status: productStatus} = useAppSelector(state => state.catalog)
     const [quantity, setQuantity] = useState(0);
-    const item = basket?.items.find(i => i.productId === product?.id)
+    const item = basket?.items.find(i => i.productID === product?.id)
 
     useEffect(() => {
         if (item) setQuantity(item.quantity);
@@ -43,7 +43,7 @@ export default function ProductDetails() {
     return (
         <Grid container spacing={6}>
             <Grid item xs={6}>
-                <img src={product.pictureUrl} alt={product.name} style={{ width: '100%' }} />
+                <img src={product.pictureURL} alt={product.name} style={{ width: '100%' }} />
             </Grid>
             <Grid item xs={6}>
                 <Typography variant="h3">{product.name}</Typography>

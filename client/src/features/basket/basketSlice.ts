@@ -76,7 +76,7 @@ export const basketSlice = createSlice({
         });
         builder.addCase(removeBasketItemAsync.fulfilled, (state, action) => {
             const { productId, quantity } = action.meta.arg;
-            const itemIndex = state.basket?.items.findIndex(i => i.productId === productId)
+            const itemIndex = state.basket?.items.findIndex(i => i.productID === productId)
             if (itemIndex === -1 || itemIndex === undefined) return;
             state.basket!.items[itemIndex].quantity -= quantity;
             if (state.basket?.items[itemIndex].quantity === 0) state.basket.items.splice(itemIndex, 1);

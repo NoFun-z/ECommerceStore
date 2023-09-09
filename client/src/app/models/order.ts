@@ -9,16 +9,16 @@ export interface ShippingAddress {
 }
 
 export interface OrderItem {
-    productId: number;
+    productID: number;
     name: string;
-    pictureUrl: string;
+    pictureURL: string;
     price: number;
     quantity: number;
 }
 
 export interface Order{
     id: number;
-    buyerId: string;
+    buyerID: string;
     shippingAddress: ShippingAddress;
     orderDate: string;
     orderItems: OrderItem[];
