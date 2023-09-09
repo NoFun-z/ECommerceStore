@@ -20,6 +20,5 @@ namespace API.DTOs
         [Required]
         [Range(0, 200)]
         public int QuantityInStock { get; set; }
-        //public double Rating { get; set; }
     }
 }

@@ -13,21 +13,26 @@ namespace API.Entities
         public string Type { get; set; }
         public string Brand { get; set; }
         public int QuantityInStock { get; set; }
-        
+
         [NotMapped]
-        public int[] Rating { get; set; }
+        private List<int> Rating { get; set; }
         public string PublicID { get; set; }
-        
+
         //Public property for rating average
+        [NotMapped]
         public double AverageRating
         {
             get
             {
-                if (Rating == null || Rating.Length == 0)
+                if (Rating == null || Rating.Count == 0)
                 {
                     return 0;
                 }
                 return Rating.Average();
+            }
+            set
+            {
+                Rating.Add((int)value);
             }
         }
     }
