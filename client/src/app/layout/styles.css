@@ -1,3 +1,13 @@
 .app h1{
   color: red;
 }
+
+.filter-arrow-icon{
+  color: #4f8787;
+  transition: transform 0.2s ease-out;
+}
+
+.filter-arrow-icon.expanded{
+  transform: rotate(180deg);
+}
+

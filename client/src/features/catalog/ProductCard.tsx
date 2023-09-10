@@ -23,7 +23,7 @@ export default function ProductCard({ product }: Props) {
             }
                 title={product.name}
                 titleTypographyProps={{
-                    sx: { fontWeight: 'bold', color: 'primary.main' }
+                    sx: { fontWeight: 'bold', color: '#46a3b4' }
                 }}
             />
             <CardMedia
@@ -40,8 +40,8 @@ export default function ProductCard({ product }: Props) {
                 </Typography>
             </CardContent>
             <CardActions>
-                <Button onClick={() => dispatch(addBasketItemAsync({ productId: product.id }))} size="small">Add to cart</Button>
-                <Button component={Link} to={`/catalog/${product.id}`} size="small">View</Button>
+                <Button sx={{color: '#46a3b4'}} onClick={() => dispatch(addBasketItemAsync({ productId: product.id }))} size="small">Add to cart</Button>
+                <Button sx={{color: '#46a3b4'}} component={Link} to={`/catalog/${product.id}`} size="small">View</Button>
             </CardActions>
         </Card>
     )

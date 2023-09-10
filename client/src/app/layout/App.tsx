@@ -35,11 +35,15 @@ export default function App() {
   const theme = createTheme({
     palette: {
       mode: paletteType,
+      primary: {
+        main: paletteType === 'light' ? '#4f4e4a' : '#cccbc8',
+      },
       background: {
-        default: paletteType === 'light' ? '#eaeaea' : '#121212'
-      }
-    }
-  })
+        default: paletteType === 'light' ? '#e6e6e6' : '#333333',
+      },
+    },
+  });
+  
 
   function ThemeSwitchHandler() {
     setDarkMode(prev => !prev)
