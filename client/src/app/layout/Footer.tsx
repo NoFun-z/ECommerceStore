@@ -18,7 +18,7 @@ export default function Footer({darkmode}: Props) {
     return (
         <Box sx={footerStyle}>
             <Typography variant="body1">
-                &copy; {new Date().getFullYear()} SnowFlake Inc. All rights
+                &copy; {new Date().getFullYear()} SnowFake Inc. All rights
                 reserved.
             </Typography>
         </Box>

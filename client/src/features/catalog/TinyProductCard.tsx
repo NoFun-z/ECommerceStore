@@ -17,7 +17,7 @@ export default function TinyProductCard({ product }: Props) {
                 <CardContent sx={{ paddingBottom: '5px' }}>
                     <Typography variant="body2" color="text.secondary">
                         {product.description.length > 80
-                            ? `${product.description.substring(0, 30)}...`
+                            ? `${product.description.substring(0, 24)}...`
                             : product.description}
                     </Typography>
                 </CardContent>
