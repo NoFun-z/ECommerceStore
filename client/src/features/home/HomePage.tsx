@@ -36,7 +36,7 @@ export default function HomePage() {
                 .then(orders => setOrders(orders))
                 .catch(er => console.log(er))
         }
-        
+
         fetchData();
     }, []);
 
@@ -99,11 +99,8 @@ export default function HomePage() {
     const top3BoughtProducts = products.filter((prod) =>
         latestProductIDs.includes(prod.id));
 
-    const startIndex = 1;
-    const endIndex = products.length;
-
-    const randomIndex = Math.floor(Math.random() * (endIndex - startIndex + 1)) + startIndex;
-    const randomProduct: Product[] = products.filter(p => p.id === randomIndex);
+    const sortedRating = products;
+    const todayDeal = sortedRating.sort((a, b) => b.averageRating - a.averageRating).slice(0, 1);
 
     return (
         <Container style={{
@@ -155,7 +152,7 @@ export default function HomePage() {
                             textAlign: "center",
                             fontSize: "2rem"
                         }} variant="h3" >Today's Deal</Typography>
-                        {randomProduct.map(lmao => <ProductCardClickable key={lmao.id} product={lmao} />)}
+                        {todayDeal.map(deal => <ProductCardClickable key={deal.id} product={deal} />)}
                     </Paper>
                 </Grid>
                 {top3BoughtProducts.length > 0 &&
