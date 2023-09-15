@@ -4,8 +4,6 @@ import { router } from "../router/Routes";
 import { PaginatedResponse } from "../models/pagination";
 import { store } from "../store/ConfigureStore";
 
-const sleep = () => new Promise(resolve => setTimeout(resolve, 500))
-
 axios.defaults.baseURL = process.env.REACT_APP_API_URL;
 axios.defaults.withCredentials = true;
 
@@ -18,7 +16,6 @@ axios.interceptors.request.use(config => {
 })
 
 axios.interceptors.response.use(async response => {
-    if (process.env.NODE_ENV === "development") await sleep();
     const pagination = response.headers['pagination'];
     if (pagination) {
         response.data = new PaginatedResponse(response.data, JSON.parse(pagination));
@@ -84,6 +81,7 @@ const Admin = {
 
 
 const Catalog = {
+    getAll: () => requests.get('products/all'),
     list: (params: URLSearchParams) => requests.get('products', params),
     details: (id: number) => requests.get(`products/${id}`),
     fetchFilters: () => requests.get('products/filters')
@@ -120,6 +118,13 @@ const Payments = {
     createPaymentIntent: () => requests.post('payments', {})
 }
 
+const Comments = {
+    getAll: () => requests.get('products/comments/all'),
+    getComment: (params: URLSearchParams) => requests.get('products/comments', params),
+    createComment: (comment: any) => requests.postForm('products/comments', createFormData(comment)),
+    updateRating: (product: any) => requests.putForm('products/ratings', createFormData(product)),
+}
+
 const agent = {
     Catalog,
     TestErrors,
@@ -127,7 +132,8 @@ const agent = {
     Account,
     Orders,
     Payments,
-    Admin
+    Admin,
+    Comments
 }
 
 export default agent;

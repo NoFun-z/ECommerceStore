@@ -1,4 +1,4 @@
-import { Grid, Paper, useMediaQuery, useTheme } from "@mui/material";
+import { Grid, Paper } from "@mui/material";
 import LoadingComponent from "../../app/layout/LoadingComponent";
 import { useAppDispatch, useAppSelector } from "../../app/store/ConfigureStore";
 import { setPageNumber, setProductParams } from "./catalogSlice";
@@ -26,13 +26,14 @@ export default function Catalog() {
     const [isFilterByBrand, setIsFilterByBrand] = useState(false);
     const [isFilterByType, setIsFilterByType] = useState(false);
 
-    const theme = useTheme();
-    const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+    const handlePageChange = (page: number) => {
+        dispatch(setPageNumber({ pageNumber: page }));
+      };
 
     if (!filtersLoaded) return <LoadingComponent message="Loading products..." />
 
     return (
-        <Grid container columnSpacing={2}>
+        <Grid container columnSpacing={2} sx={{ mb: 5 }}>
             <Grid item xs={12} sm={12} md={3} lg={3} xl={3}>
                 <Paper sx={{ mb: 2 }}>
                     <ProductSearch />
@@ -52,6 +53,7 @@ export default function Catalog() {
                             selectedValue={productParams.orderBy}
                             options={sortOptions}
                             onChange={(event) => {
+                                handlePageChange(1);
                                 dispatch(setProductParams({ orderBy: event }))
                             }}
                         />
@@ -71,6 +73,7 @@ export default function Catalog() {
                             items={brands}
                             checked={productParams.brands!}
                             onChange={(items: string[]) => {
+                                handlePageChange(1);
                                 dispatch(setProductParams({ brands: items }))
                             }} />
                     </Paper>
@@ -90,6 +93,7 @@ export default function Catalog() {
                             items={types}
                             checked={productParams.types!}
                             onChange={(items: string[]) => {
+                                handlePageChange(1);
                                 dispatch(setProductParams({ types: items }))
                             }} />
                     </Paper>)}
@@ -98,7 +102,7 @@ export default function Catalog() {
                 {metaData &&
                     <AppPagination
                         metaData={metaData}
-                        onPageChange={(page: number) => dispatch(setPageNumber({ pageNumber: page }))} />}
+                        onPageChange={handlePageChange} />}
                 <ProductList products={products} /></Grid>
         </Grid >
     )

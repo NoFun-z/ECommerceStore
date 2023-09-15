@@ -24,6 +24,14 @@ namespace API.Controllers
             _context = context;
         }
 
+        [HttpGet("all")]
+        public async Task<ActionResult<IEnumerable<Product>>> GetProducts()
+        {
+            var products = await _context.Products.ToListAsync();
+
+            return Ok(products);
+        }
+
         [HttpGet]
         public async Task<ActionResult<PagedList<Product>>> GetProducts([FromQuery] ProductParams productParams)
         {
@@ -141,5 +149,60 @@ namespace API.Controllers
             return BadRequest(new ProblemDetails { Title = "Problem deleting product" });
         }
 
+        [Authorize]
+        [HttpPut("ratings")]
+        public async Task<ActionResult<Product>> UpdateProductRating([FromForm] UpdateProductRatingDTO productDTO)
+        {
+            var product = await _context.Products.FindAsync(productDTO.ID);
+
+            if (product == null) return NotFound();
+
+            _mapper.Map(productDTO, product);
+
+            var result = await _context.SaveChangesAsync() > 0;
+
+            if (result) return Ok(product);
+
+            return BadRequest(new ProblemDetails { Title = "Problem updating product" });
+        }
+
+        [HttpGet("comments/all")]
+        public async Task<ActionResult<IEnumerable<Comment>>> GetAllComments()
+        {
+            var comments = await _context.Comments.ToListAsync();
+
+            return Ok(comments);
+        }
+
+        [HttpGet("comments", Name = "GetComment")]
+        public async Task<ActionResult<PagedList<Comment>>> GetComments([FromQuery] ProductCommentParams productCommentParams)
+        {
+            var query = _context.Comments
+            .FilterComment(productCommentParams.ProductID)
+            .AsQueryable();
+
+            var comments = await PagedList<Comment>.ToPagedList(query,
+             productCommentParams.PageNumber, productCommentParams.PageSize);
+
+            Response.AddPaginationHeader(comments.MetaData);
+
+
+            return comments;
+        }
+
+        [Authorize]
+        [HttpPost("comments")]
+        public async Task<ActionResult<Comment>> CreateComment([FromForm] CreateCommentDTO commentDTO)
+        {
+            var comment = _mapper.Map<Comment>(commentDTO);
+
+            _context.Comments.Add(comment);
+
+            var result = await _context.SaveChangesAsync() > 0;
+
+            if (result) return CreatedAtRoute("GetComment", new { Id = comment.ID }, comment);
+
+            return BadRequest(new ProblemDetails { Title = "Problem creating new Comment" });
+        }
     }
 }

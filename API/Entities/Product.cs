@@ -1,10 +1,10 @@
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.IdentityModel.Tokens;
 
 namespace API.Entities
 {
     public class Product
     {
-
         public int ID { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
@@ -15,11 +15,10 @@ namespace API.Entities
         public int QuantityInStock { get; set; }
 
         [NotMapped]
-        private List<int> Rating { get; set; }
+        private List<double> Rating { get; set; } = new List<double>();
         public string PublicID { get; set; }
 
         //Public property for rating average
-        [NotMapped]
         public double AverageRating
         {
             get
@@ -32,7 +31,11 @@ namespace API.Entities
             }
             set
             {
-                Rating.Add((int)value);
+                Rating.Add(value);
+                if (Rating[0] == 0)
+                {
+                    Rating.RemoveAt(0);
+                }
             }
         }
     }

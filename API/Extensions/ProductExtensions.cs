@@ -1,4 +1,5 @@
 using API.Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace API.Extensions
 {
@@ -39,6 +40,11 @@ namespace API.Extensions
             query = query.Where(p => typeList.Count == 0 || typeList.Contains(p.Type.ToLower()));
 
             return query;
+        }
+
+        public static IQueryable<Comment> FilterComment(this IQueryable<Comment> query, int productID)
+        {
+            return query.Where(p => p.productID == productID);
         }
     }
 }

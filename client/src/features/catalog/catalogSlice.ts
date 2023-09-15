@@ -28,7 +28,7 @@ function getAxioxParams(productParams: ProductParams) {
 }
 
 export const fetchProductsAsync = createAsyncThunk<Product[], void, { state: RootState }>(
-    'catalog/fetchProdutsAsync',
+    'catalog/fetchProductsAsync',
     async (_, thunkAPI) => {
         const params = getAxioxParams(thunkAPI.getState().catalog.productParams);
         try {
@@ -43,7 +43,7 @@ export const fetchProductsAsync = createAsyncThunk<Product[], void, { state: Roo
 )
 
 export const fetchProductAsync = createAsyncThunk<Product, number>(
-    'catalog/fetchProdutAsync',
+    'catalog/fetchProductAsync',
     async (productId, thunkAPI) => {
         try {
             return await agent.Catalog.details(productId);

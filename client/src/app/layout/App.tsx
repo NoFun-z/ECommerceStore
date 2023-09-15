@@ -1,4 +1,4 @@
-import { Container, CssBaseline, ThemeProvider, createTheme } from "@mui/material";
+import { Box, Container, CssBaseline, ThemeProvider, createTheme } from "@mui/material";
 import Header from "./Header";
 import { useCallback, useEffect, useState } from "react";
 import { Outlet, useLocation } from "react-router-dom";
@@ -9,6 +9,7 @@ import { useAppDispatch } from "../store/ConfigureStore";
 import { fetchBasketAsync } from "../../features/basket/basketSlice";
 import { fetchCurrentUser } from "../../features/account/accountSlice";
 import HomePage from "../../features/home/HomePage";
+import Footer from "./Footer";
 
 export default function App() {
   const location = useLocation();
@@ -43,26 +44,26 @@ export default function App() {
       },
     },
   });
-  
 
   function ThemeSwitchHandler() {
     setDarkMode(prev => !prev)
   }
 
   return (
-    <>
-      <ThemeProvider theme={theme}>
-        <ToastContainer position="bottom-right" hideProgressBar theme="colored" />
-        <CssBaseline />
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      <div style={{ display: "flex", flexDirection: "column", minHeight: "100vh" }}>
         <Header darkMode={darkmode} ThemeChangeHandler={ThemeSwitchHandler} />
-        {loading ? <LoadingComponent message="Initializing app..."/>
-          : location.pathname === '/' ? <HomePage />
-            : <Container sx={{ mt: 4 }}>
-              <Outlet />
-            </Container>
-        }
-      </ThemeProvider>
-    </>
+        <div style={{ flex: 1 }}>
+          {loading ? <LoadingComponent message="Initializing app..." />
+            : location.pathname === '/' ? <HomePage />
+              : <Container sx={{ mt: 4 }}>
+                <Outlet />
+              </Container>
+          }
+        </div>
+        <Footer darkmode={darkmode} />
+      </div>
+    </ThemeProvider>
   );
 }
-

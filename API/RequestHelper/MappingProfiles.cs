@@ -10,6 +10,9 @@ namespace API.RequestHelper
         {
             CreateMap<CreateProductDTO, Product>();
             CreateMap<UpdateProductDTO, Product>();
+            CreateMap<UpdateProductRatingDTO, Product>()
+            .ForMember(dest => dest.AverageRating, opt => opt.MapFrom(src => src.AverageRating));
+            CreateMap<CreateCommentDTO, Comment>();
         }
     }
 }

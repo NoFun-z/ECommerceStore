@@ -7,7 +7,7 @@ export interface Product {
     type?: string
     brand: string
     quantityInStock?: number
-    rating?: number[]
+    averageRating: number
 }
 
 export interface ProductParams{

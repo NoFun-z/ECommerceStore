@@ -15,7 +15,7 @@ export default function PaymentForm({cardState, onCardInputChange} : Props) {
   return (
     <>
       <Typography variant="h6" gutterBottom>
-        Payment method
+        Payment method - Try 4242 4242 4242 4242
       </Typography>
       <Grid container spacing={3}>
         <Grid item xs={12} md={6}>
@@ -26,6 +26,7 @@ export default function PaymentForm({cardState, onCardInputChange} : Props) {
             onChange={onCardInputChange}
             error={!!cardState.elementError.cardNumber}
             helperText={cardState.elementError.cardNumber}
+            color="primary"
             id="cardNumber"
             label="Card number"
             fullWidth
@@ -45,6 +46,7 @@ export default function PaymentForm({cardState, onCardInputChange} : Props) {
             onChange={onCardInputChange}
             error={!!cardState.elementError.cardExpiry}
             helperText={cardState.elementError.cardExpiry}
+            color="primary"
             id="expDate"
             label="Expiry date"
             fullWidth
@@ -64,6 +66,7 @@ export default function PaymentForm({cardState, onCardInputChange} : Props) {
             onChange={onCardInputChange}
             error={!!cardState.elementError.cardCvc}
             helperText={cardState.elementError.cardCvc}
+            color="primary"
             id="cvv"
             label="CVC"
             fullWidth

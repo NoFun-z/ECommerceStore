@@ -11,7 +11,7 @@ interface Props {
 }
 
 const midLinks = [
-    { title: 'catalog', path: '/catalog' },
+    { title: 'products', path: '/catalog' },
     { title: 'about', path: '/about' },
     { title: 'contact', path: '/contact' }
 ]
@@ -79,7 +79,7 @@ export default function Header({ darkMode, ThemeChangeHandler }: Props) {
                         </IconButton>
                         {/* Render burger icon only on medium and small screens */}
                         <IconButton edge="start" color="inherit" aria-label="menu" onClick={toggleMenu}>
-                            Fuck
+                            Menu
                         </IconButton>
                     </Box>
                 </Hidden>

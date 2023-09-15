@@ -1,4 +1,4 @@
-# fly.toml app configuration file generated for ecomreactdev on 2023-09-08T22:07:48-04:00
+# fly.toml app configuration file generated for ecomreactdev on 2023-09-14T21:22:31-04:00
 #
 # See https://fly.io/docs/reference/configuration/ for information about how to use this file.
 #
@@ -8,11 +8,10 @@ primary_region = "yyz"
 
 [build]
   image = "hoangloc1511/ecomreactdev:latest"
+
 [env]
   ASPNETCORE_URLS="http://+:8080"
   StripeSettings_PublishableKey="pk_test_51Nh1l5BYQAopjhAKGQrmQ4MnPROp6o8JtMcUNVfJM07CXJ4RoNgzzCxuLxtu5WnEW7r0RatHGxNGuoqjghjUG0Nn00K1yX6yuy"
-  Cloudinary__CloudName="dajjftzch"
-  Cloudinary__ApiKey="131853852137617"
 
 [http_service]
   internal_port = 8080

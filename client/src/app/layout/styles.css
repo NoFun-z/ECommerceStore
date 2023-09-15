@@ -1,13 +1,27 @@
-.app h1{
+.app h1 {
   color: red;
 }
 
-.filter-arrow-icon{
+.filter-arrow-icon {
   color: #4f8787;
   transition: transform 0.2s ease-out;
 }
 
-.filter-arrow-icon.expanded{
+.filter-arrow-icon.expanded {
   transform: rotate(180deg);
 }
 
+/* styles.css (or your preferred stylesheet) */
+
+/* Initially hide comments with opacity 0 */
+.all-comments,
+.personal-comments {
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+}
+
+/* Fade in when visible */
+.all-comments.fade-in,
+.personal-comments.fade-in {
+  opacity: 1;
+}
