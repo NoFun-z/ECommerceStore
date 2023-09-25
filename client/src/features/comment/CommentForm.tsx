@@ -32,7 +32,7 @@ export default function CommentForm({ productID, cancelReview, userCommentTimes 
       let commentResponse: Comment;
       let newComment = {
         productID: productID,
-        buyerID: user?.userName || 'Unknown',
+        buyerID: user?.userName || 'Annonymous',
         title: data.Title,
         text: data.Text,
         rating: rating,
