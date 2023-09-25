@@ -82,7 +82,7 @@ export default function Register() {
                         required: "Password is required",
                         pattern: {
                             value: /(?=^.{6,10}$)(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*()_+}{":;'?/>.,])(?!.*\s).*$/,
-                            message: 'Passowrd does not meet requirements'
+                            message: 'Password need to contain an uppercase, numbers & a special symbol'
                         }
                     })}
                     error={!!errors.password}
@@ -100,7 +100,7 @@ export default function Register() {
                 </Button>
                 <Grid container>
                     <Grid item>
-                        <Link to="/register">
+                        <Link to="/login">
                             {"Already have an account? Sign In"}
                         </Link>
                     </Grid>

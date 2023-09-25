@@ -19,7 +19,7 @@ export default function CommentForm({ productID, cancelReview, userCommentTimes 
   const { user } = useAppSelector((state) => state.account);
   const dispatch = useAppDispatch();
   const [rating, setRating] = useState<number | null>(0);
-  const { control, handleSubmit } = useForm();
+  const { control, formState, handleSubmit } = useForm();
 
   async function handleSubmitData(data: FieldValues) {
     try {
@@ -32,7 +32,7 @@ export default function CommentForm({ productID, cancelReview, userCommentTimes 
       let commentResponse: Comment;
       let newComment = {
         productID: productID,
-        buyerID: user?.email || 'Unknown',
+        buyerID: user?.userName || 'Unknown',
         title: data.Title,
         text: data.Text,
         rating: rating,
@@ -58,7 +58,13 @@ export default function CommentForm({ productID, cancelReview, userCommentTimes 
             setRating(newValue);
           }}
         />
-        <AppTextInput control={control} name="Title" label="Title" inputProps={{maxLength: 15}} />
+        <AppTextInput
+          control={control}
+          name="Title"
+          label="Title"
+          rules={{ required: true }}
+          inputProps={{ maxLength: 15}}/>
+
         <AppTextInput
           multiline={true}
           rows={4}
@@ -71,7 +77,7 @@ export default function CommentForm({ productID, cancelReview, userCommentTimes 
         <Button variant="outlined" onClick={cancelReview}>
           Cancel
         </Button>
-        <Button variant="contained" type="submit" disabled={userCommentTimes > 2}>
+        <Button variant="contained" type="submit" disabled={userCommentTimes > 2 || rating! < 1 || !formState.isValid}>
           Submit
         </Button>
       </Stack>

@@ -158,7 +158,7 @@ export default function ProductDetails() {
                 </Grid>
                 <Grid item xs={12} md={12} lg={2}>
                     <Box sx={{ border: '1px solid #ccc', padding: '10px', borderRadius: '4px' }}>
-                        <Typography variant="h6">After Tax: ${((product.price + (product.price / 100 * 15)) * quantity / 100).toFixed(2)}</Typography>
+                        <Typography variant="h6">After Tax: ${quantity > 0 ? ((product.price + (product.price / 100 * 15)) * quantity / 100).toFixed(2) : 0}</Typography>
                         <Divider sx={{ mb: 2 }} />
                         <Typography sx={{ marginBottom: '10px' }} >{product.price > 10000 ? "Free Deliver" : "$5 Delivery"} on {getDeliveryDateRange()}</Typography>
                         <Divider sx={{ mb: 2 }} />

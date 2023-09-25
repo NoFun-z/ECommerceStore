@@ -9,7 +9,7 @@ export default function BasketPage() {
   const { basket } = useAppSelector(state => state.basket);
 
 
-  if (!basket) return <Typography variant="h3">Your basket is empty</Typography>
+  if (!basket || basket.items.length < 1) return <Typography variant="h3">Your basket is empty</Typography>
 
   return (
     <>

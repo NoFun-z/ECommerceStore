@@ -22,7 +22,6 @@ export default function AppTextInput(props: Props) {
             variant="outlined"
             error={!!fieldState.error}
             helperText={fieldState.error?.message}
-            inputProps={props.inputProps}
         />
     )
 }
