@@ -42,6 +42,7 @@ namespace API.Controllers
 
             return new UserDTO
             {
+                UserName = user.UserName,
                 Email = user.Email,
                 Token = await _tokenService.GenerateToken(user),
                 Basket = anonBasket != null ? anonBasket.MapBasketToDTO() : userBasket?.MapBasketToDTO()

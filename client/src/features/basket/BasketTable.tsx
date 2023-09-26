@@ -3,6 +3,7 @@ import { TableContainer, Paper, Table, TableHead, TableRow, TableCell, TableBody
 import { removeBasketItemAsync, addBasketItemAsync } from "./basketSlice";
 import { BasketItem } from "../../app/models/basket";
 import { useAppSelector, useAppDispatch } from "../../app/store/ConfigureStore";
+import { currencyFormat } from "../../app/util/util";
 
 interface Props {
     items: BasketItem[],
@@ -54,7 +55,11 @@ export default function BasketTable({ items, isBasket = true }: Props) {
                                         <Add />
                                     </Button>}
                             </TableCell>
-                            <TableCell align="right">{((row.price / 100) * row.quantity).toFixed(2)}</TableCell>
+                            <TableCell align="right">
+                                {row.discount > 0
+                                    ? `25%OFF - ${currencyFormat(((row.price - row.discount) + (row.price / 100 * 15)) * row.quantity)}`
+                                    : currencyFormat(((row.price - row.discount) + (row.price / 100 * 15)) * row.quantity)}
+                            </TableCell>
                             {isBasket &&
                                 <TableCell align="right">
                                     <Button

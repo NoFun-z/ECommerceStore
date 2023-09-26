@@ -1,4 +1,4 @@
-import { Avatar, Card, CardContent, CardHeader, CardMedia, Rating, Typography } from "@mui/material";
+import { Card, CardContent, CardMedia, Typography } from "@mui/material";
 import { Product } from "../../app/models/product";
 import { Link } from "react-router-dom";
 interface Props {

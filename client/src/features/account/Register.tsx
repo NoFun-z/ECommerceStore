@@ -11,6 +11,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import agent from '../../app/api/agent';
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
+import { LoadingButton } from '@mui/lab';
 
 
 export default function Register() {
@@ -48,14 +49,14 @@ export default function Register() {
                     toast.success('Registration successful - you can now login')
                     navigate('/login');
                 })
-                .catch(error => handleApiErrors(error)))}
+                .catch(error => handleApiErrors(error)).finally(() => console.log(data)))}
                 noValidate sx={{ mt: 1 }}>
                 <TextField
                     margin="normal"
                     fullWidth
-                    label="Username"
+                    label="UserName"
                     autoFocus
-                    {...register('username', { required: "Username is required" })}
+                    {...register('username', { required: "UserName is required" })}
                     error={!!errors.username}
                     helperText={errors?.username?.message as string}
                 />
@@ -89,7 +90,8 @@ export default function Register() {
                     helperText={errors?.password?.message as string}
                 />
 
-                <Button
+                <LoadingButton
+                    loading= {isSubmitting}
                     disabled={!isValid}
                     type="submit"
                     fullWidth
@@ -97,7 +99,7 @@ export default function Register() {
                     sx={{ mt: 3, mb: 2 }}
                 >
                     Register
-                </Button>
+                </LoadingButton>
                 <Grid container>
                     <Grid item>
                         <Link to="/login">

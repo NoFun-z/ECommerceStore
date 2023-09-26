@@ -11,6 +11,7 @@ import agent from "../../app/api/agent";
 import { useAppDispatch } from "../../app/store/ConfigureStore";
 import { setProduct } from "../catalog/catalogSlice";
 import AppTextInput from "../../app/components/ApptextInput";
+import { LoadingButton } from "@mui/lab";
 
 interface Props {
     product?: Product;
@@ -87,7 +88,7 @@ export default function ProductForm({ product, cancelEdit }: Props) {
                 </Grid>
                 <Box display='flex' justifyContent='space-between' sx={{ mt: 3 }}>
                     <Button onClick={cancelEdit} variant='contained' color='inherit'>Cancel</Button>
-                    <Button type="submit" variant='contained' color='success'>Submit</Button>
+                    <LoadingButton loading={isSubmitting} type="submit" variant='contained' color='success'>Submit</LoadingButton>
                 </Box>
             </form>
         </Box>

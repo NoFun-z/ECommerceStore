@@ -10,7 +10,7 @@ interface Props {
     product: Product;
 }
 
-export default function ProductCardClickable({ product}: Props) {
+export default function ProductCardClickable({ product }: Props) {
     const [allComments, setAllComments] = useState<Comment[]>([])
 
     useEffect(() => {
@@ -38,9 +38,17 @@ export default function ProductCardClickable({ product}: Props) {
                     title={product.name}
                 />
                 <CardContent sx={{ paddingBottom: '5px' }}>
-                    <Typography gutterBottom color='secondary' variant="h5">
+                    {product.discount === 0 ? (<Typography gutterBottom color='secondary' variant="h5">
                         {currencyFormat(product.price)}
-                    </Typography>
+                    </Typography>)
+                        :
+                        (<Typography gutterBottom sx={{ display: 'flex', alignItems: 'center', whiteSpace: 'pre-wrap' }} color='secondary' variant="h6">
+                            <span style={{ textDecoration: 'line-through' }}>{currencyFormat(product.price)}</span>
+                            <span style={{ color: 'red', fontWeight: 'bold' }}>
+                                {` ${currencyFormat(product.price - product.discount)}`} (25%)
+                            </span>
+                        </Typography>)
+                    }
                     <Typography variant="body2" color="text.secondary">
                         {product.description.length > 80
                             ? `${product.description.substring(0, 80)}...`

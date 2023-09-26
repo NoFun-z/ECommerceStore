@@ -5,19 +5,22 @@ import { formatDate } from "../../app/util/util"
 import { useAppSelector } from "../../app/store/ConfigureStore"
 import LoopIcon from '@mui/icons-material/Loop';
 import PersonIcon from '@mui/icons-material/Person';
+import { Product } from "../../app/models/product"
 
 interface Props {
     productComment: Comment[]
     cmtBool: boolean
     setCmtBool: () => void
+    comments: Comment[]
+    product: Product
 }
 
 
-export default function CommentSection({ productComment, cmtBool, setCmtBool }: Props) {
+export default function CommentSection({ productComment, cmtBool, setCmtBool, comments, product }: Props) {
     const { user } = useAppSelector(state => state.account)
 
     let commentText = cmtBool ? "Your Reviews" : "Top Reviews"
-    const personalReviews = productComment.filter(c => c.buyerID === user?.email);
+    const personalReviews = comments.filter(c => c.buyerID === user?.userName && c.productID === product.id);
     const commentListClass = cmtBool ? "personal-comments" : "all-comments";
 
     const [fadeIn, setFadeIn] = useState(false);
@@ -46,7 +49,7 @@ export default function CommentSection({ productComment, cmtBool, setCmtBool }: 
             ) : (
                 <div className={`${commentListClass} ${fadeIn ? 'fade-in' : ''}`}>
                     {(cmtBool ? personalReviews : productComment).map((comment, index) => (
-                        <Paper key={index} elevation={3} sx={{ p: 2, mb: 2 }}>
+                        <Paper key={index} elevation={3} sx={{ p: 2, mb: 1.5 }}>
                             <Box alignItems="center">
                                 <Box sx={{ display: 'flex', mb: 1 }} alignItems="center">
                                     <Avatar sx={{ bgcolor: 'primary', marginRight: '10px' }}><PersonIcon/></Avatar> {/* Anonymized avatar */}

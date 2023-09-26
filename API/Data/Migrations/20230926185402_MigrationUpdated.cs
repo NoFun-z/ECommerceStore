@@ -127,6 +127,7 @@ namespace API.Data.Migrations
                     Type = table.Column<string>(type: "text", nullable: true),
                     Brand = table.Column<string>(type: "text", nullable: true),
                     QuantityInStock = table.Column<int>(type: "integer", nullable: false),
+                    Discount = table.Column<long>(type: "bigint", nullable: false),
                     PublicID = table.Column<string>(type: "text", nullable: true),
                     AverageRating = table.Column<double>(type: "double precision", nullable: false)
                 },
@@ -277,6 +278,7 @@ namespace API.Data.Migrations
                     ItemOrdered_PictureURL = table.Column<string>(type: "text", nullable: true),
                     Price = table.Column<long>(type: "bigint", nullable: false),
                     Quantity = table.Column<int>(type: "integer", nullable: false),
+                    Discount = table.Column<long>(type: "bigint", nullable: false),
                     OrderID = table.Column<int>(type: "integer", nullable: true)
                 },
                 constraints: table =>

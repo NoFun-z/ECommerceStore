@@ -1,4 +1,4 @@
-import { Box, Button, Container, Grid, Paper, Typography } from "@mui/material";
+import { Container, Grid, Paper, Typography } from "@mui/material";
 import { useState, useEffect } from "react";
 import agent from "../../app/api/agent";
 import { Comment } from "../../app/models/comment";
@@ -6,13 +6,15 @@ import { Product } from "../../app/models/product";
 import TinyProductCard from "../catalog/TinyProductCard";
 import { Order } from "../../app/models/order";
 import ProductCardClickable from "../catalog/ProductCardClickable";
-import ContactIcon from "@mui/icons-material/ContactSupport";
 import { useAppSelector } from "../../app/store/ConfigureStore";
+import HomeStrategy from "./HomeStrategy";
+import useProducts from "../../app/hooks/useProduct";
 
 
 export default function HomePage() {
     const [allComments, setAllComments] = useState<Comment[]>([]);
-    const [products, setProducts] = useState<Product[]>([]);
+    const [allProducts, setAllProducts] = useState<Product[]>([]);
+    const {products} = useProducts();
     const [orders, setOrders] = useState<Order[] | null>(null);
     const user = useAppSelector(state => state.account);
 
@@ -24,7 +26,7 @@ export default function HomePage() {
                     agent.Catalog.getAll(),
                     agent.Comments.getAll(),
                 ]);
-                setProducts(productsData);
+                setAllProducts(productsData);
                 setAllComments(commentsData);
             } catch (error) {
                 console.error(error);
@@ -38,7 +40,7 @@ export default function HomePage() {
         }
 
         fetchData();
-    }, []);
+    }, [user, products]);
 
 
     const productRatings: Record<number, { totalRating: number; count: number }> =
@@ -75,7 +77,7 @@ export default function HomePage() {
         .slice(0, 3)
         .map((item) => item.productID);
 
-    const top3Products = products.filter((prod) =>
+    const top3Products = allProducts.filter((prod) =>
         top3ProductIDs.includes(prod.id)
     );
 
@@ -96,10 +98,10 @@ export default function HomePage() {
         }
     }
 
-    const top3BoughtProducts = products.filter((prod) =>
+    const top3BoughtProducts = allProducts.filter((prod) =>
         latestProductIDs.includes(prod.id));
 
-    const sortedRating = products;
+    const sortedRating = allProducts;
     const todayDeal = sortedRating.sort((a, b) => b.averageRating - a.averageRating).slice(0, 1);
 
     return (
@@ -174,73 +176,7 @@ export default function HomePage() {
                         </Paper>
                     </Grid>}
             </Grid>
-            <Box
-                sx={{
-                    backgroundImage: `url("/images/hero2.jpg")`,
-                    backgroundSize: "cover",
-                    backgroundRepeat: "no-repeat",
-                    backgroundPosition: "center",
-                    marginTop: "2rem",
-                    backgroundColor: "rgba(255, 255, 255, 0.7)", // Background color
-                    padding: "2rem",
-                    textAlign: "center",
-                    width: "100%",
-                }}
-            >
-                <Typography variant="h3" sx={{ fontSize: "2rem", marginBottom: "1rem" }}>
-                    <span style={{ textShadow: "0 0 10px rgba(0, 0, 0, 0.5)" }}>New Marketing Strategy</span>
-                </Typography>
-                <Typography variant="body1" sx={{ marginBottom: "1rem" }}>
-                    <span style={{ textShadow: "0 0 10px rgba(0, 0, 0, 0.5)" }}>
-                        Discover our exciting new marketing plans that will boost your business to new heights. Whether you're looking to expand your reach, increase sales, or enhance your brand, we've got a plan for you.
-                    </span>
-                </Typography>
-                <Grid container justifyContent="center" spacing={2}>
-                    <Grid item xs={12} sm={4}>
-                        {/* Plan 1 */}
-                        <Paper elevation={3} sx={{ padding: "1rem", height: "100%" }}>
-                            <Typography variant="h6" sx={{ fontSize: "1.5rem", marginBottom: "0.5rem" }}>
-                                Basic Plan
-                            </Typography>
-                            <Typography variant="body2" sx={{ marginBottom: "0.5rem" }}>
-                                Suitable for startups and small businesses.
-                            </Typography>
-                            <ContactIcon fontSize="large" color="primary" />
-                        </Paper>
-                    </Grid>
-                    <Grid item xs={12} sm={4}>
-                        {/* Plan 2 */}
-                        <Paper elevation={3} sx={{ padding: "1rem", height: "100%" }}>
-                            <Typography variant="h6" sx={{ fontSize: "1.5rem", marginBottom: "0.5rem" }}>
-                                Premium Plan
-                            </Typography>
-                            <Typography variant="body2" sx={{ marginBottom: "0.5rem" }}>
-                                Ideal for growing businesses.
-                            </Typography>
-                            <ContactIcon fontSize="large" color="primary" />
-                        </Paper>
-                    </Grid>
-                    <Grid item xs={12} sm={4}>
-                        {/* Plan 3 */}
-                        <Paper elevation={3} sx={{ padding: "1rem", height: "100%" }}>
-                            <Typography variant="h6" sx={{ fontSize: "1.5rem", marginBottom: "0.5rem" }}>
-                                Enterprise Plan
-                            </Typography>
-                            <Typography variant="body2" sx={{ marginBottom: "0.5rem" }}>
-                                Tailored solutions for large enterprises.
-                            </Typography>
-                            <ContactIcon fontSize="large" color="primary" />
-                        </Paper>
-                    </Grid>
-                </Grid>
-                <Button
-                    variant="contained"
-                    color="primary"
-                    style={{ marginTop: "2rem" }}
-                >
-                    Learn More
-                </Button>
-            </Box>
+            <HomeStrategy/>
         </Container >
     )
 }

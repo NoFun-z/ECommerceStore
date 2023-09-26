@@ -11,6 +11,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { FieldValues, useForm } from 'react-hook-form';
 import { useAppDispatch } from '../../app/store/ConfigureStore';
 import { signInUser } from './accountSlice';
+import { LoadingButton } from '@mui/lab';
 
 export default function Login() {
     const navigate = useNavigate();
@@ -57,7 +58,8 @@ export default function Login() {
                     error={!!errors.password}
                     helperText={errors?.password?.message as string}
                 />
-                <Button
+                <LoadingButton
+                    loading= {isSubmitting}
                     disabled={!isValid}
                     type="submit"
                     fullWidth
@@ -65,7 +67,7 @@ export default function Login() {
                     sx={{ mt: 3, mb: 2 }}
                 >
                     Sign In
-                </Button>
+                </LoadingButton>
                 <Grid container>
                     <Grid item>
                         <Link to="/register">

@@ -111,7 +111,8 @@ const Account = {
 const Orders = {
     list: () => requests.get('orders'),
     fetch: (id: number) => requests.get(`orders/${id}`),
-    create: (values: any) => requests.post('orders', values)
+    create: (values: any) => requests.post('orders', values),
+    updateDiscount: (product: any) => requests.putForm('products/discount', createFormData(product)),
 }
 
 const Payments = {

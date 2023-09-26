@@ -34,7 +34,7 @@ namespace API.Controllers
 
             var intent = await _paymentService.CreateOrUpdatePaymentIntent(basket);
 
-            if (intent == null) return BadRequest(new ProblemDetails { Title = "Problem creating paymeny intent" });
+            if (intent == null) return BadRequest(new ProblemDetails { Title = "Problem creating payment intent" });
 
             basket.PaymentIntentID = basket.PaymentIntentID ?? intent.Id;
             basket.ClientSecret = basket.ClientSecret ?? intent.ClientSecret;

@@ -1,6 +1,6 @@
 import { Box, Typography, Pagination } from "@mui/material";
 import { MetaData } from "../models/pagination"
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 interface Props {
     metaData: MetaData;
@@ -16,8 +16,12 @@ export default function AppPagination({ metaData, onPageChange }: Props) {
         onPageChange(page);
     }
 
+    useEffect(() => {
+        setPageNumber(currentPage); // Update pageNumber when metaData changes
+      }, [metaData]);
+
     return (
-        <Box marginBottom={2} display='flex' justifyContent="space-between" alignItems='center'>
+        <Box marginTop={2} display='flex' justifyContent="space-between" alignItems='center'>
             <Typography>
                 Displaying {(currentPage - 1) * pageSize + 1} -
                 {currentPage * pageSize > totalCount ? totalCount : currentPage * pageSize} of {totalCount} items

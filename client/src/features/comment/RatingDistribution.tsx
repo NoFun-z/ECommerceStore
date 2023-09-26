@@ -1,13 +1,13 @@
-import { Box, Rating } from "@mui/material";
+import { Box } from "@mui/material";
 import LinearProgress from "@mui/material/LinearProgress";
 
-type Rating = {
+type Ratings = {
   star: number;
   count: number;
 };
 
 interface Props {
-  ratings: Rating[];
+  ratings: Ratings[];
   totalRatings: number;
 }
 

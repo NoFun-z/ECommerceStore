@@ -20,7 +20,7 @@ export default function ProductList({ products }: Props) {
             {products.map((prod) => (
                 <Grid item xs={12} sm={6} md={6} lg={4} xl={4} key={prod.id}>
                     {!productsLoaded ? (<ProductCardSkeleton />)
-                        : (<ProductCard product={prod} />)}
+                        : (<ProductCard key={prod.id} product={prod} />)}
                 </Grid>
             ))}
         </Grid>

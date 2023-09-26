@@ -14,4 +14,5 @@ export interface Basket {
     brand: string
     type: string
     quantity: number
+    discount: number
   }

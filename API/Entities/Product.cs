@@ -16,6 +16,7 @@ namespace API.Entities
 
         [NotMapped]
         private List<double> Rating { get; set; } = new List<double>();
+        public long Discount { get; set; } = 0;
         public string PublicID { get; set; }
 
         //Public property for rating average
@@ -27,16 +28,21 @@ namespace API.Entities
                 {
                     return 0;
                 }
-                return Rating.Average();
+                if (Rating.Count > 1 && Rating[0] == 0)
+                {
+                    // Skip the first item (0) and calculate the average of the rest
+                    return Rating.Skip(1).Average();
+                }
+                else
+                {
+                    return Rating.Average();
+                }
             }
             set
             {
                 Rating.Add(value);
-                if (Rating[0] == 0)
-                {
-                    Rating.RemoveAt(0);
-                }
             }
         }
+
     }
 }

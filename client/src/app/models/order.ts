@@ -14,6 +14,7 @@ export interface OrderItem {
     pictureURL: string;
     price: number;
     quantity: number;
+    discount: number;
 }
 
 export interface Order{

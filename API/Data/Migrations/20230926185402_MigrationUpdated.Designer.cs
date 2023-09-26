@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace API.Data.Migrations
 {
     [DbContext(typeof(StoreContext))]
-    [Migration("20230915010839_MigrationUpdated")]
+    [Migration("20230926185402_MigrationUpdated")]
     partial class MigrationUpdated
     {
         /// <inheritdoc />
@@ -143,6 +143,9 @@ namespace API.Data.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("ID"));
 
+                    b.Property<long>("Discount")
+                        .HasColumnType("bigint");
+
                     b.Property<int?>("OrderID")
                         .HasColumnType("integer");
 
@@ -175,6 +178,9 @@ namespace API.Data.Migrations
 
                     b.Property<string>("Description")
                         .HasColumnType("text");
+
+                    b.Property<long>("Discount")
+                        .HasColumnType("bigint");
 
                     b.Property<string>("Name")
                         .HasColumnType("text");

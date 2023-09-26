@@ -8,6 +8,8 @@ import AppTextInput from '../../app/components/ApptextInput';
 import { Button, Rating, Stack, Typography } from '@mui/material';
 import agent from '../../app/api/agent';
 import { setProduct } from '../catalog/catalogSlice';
+import { LoadingButton } from '@mui/lab';
+import { Console } from 'console';
 
 interface Props {
   productID: number;
@@ -18,12 +20,11 @@ interface Props {
 export default function CommentForm({ productID, cancelReview, userCommentTimes }: Props) {
   const { user } = useAppSelector((state) => state.account);
   const dispatch = useAppDispatch();
-  const [rating, setRating] = useState<number | null>(0);
-  const { control, formState, handleSubmit } = useForm();
+  const [rating, setRating] = useState<number>(0);
+  const { control, formState, handleSubmit} = useForm();
 
   async function handleSubmitData(data: FieldValues) {
     try {
-      let response: ProductRating;
       let newRating = {
         id: productID,
         averageRating: rating,
@@ -37,7 +38,7 @@ export default function CommentForm({ productID, cancelReview, userCommentTimes 
         text: data.Text,
         rating: rating,
       };
-      response = await agent.Comments.updateRating(newRating);
+      const response = await agent.Comments.updateRating(newRating);
       commentResponse = await agent.Comments.createComment(newComment);
       dispatch(setProduct(response));
       dispatch(setComments(commentResponse));
@@ -55,7 +56,7 @@ export default function CommentForm({ productID, cancelReview, userCommentTimes 
           name="simple-controlled"
           value={rating}
           onChange={(event, newValue) => {
-            setRating(newValue);
+            setRating(newValue!);
           }}
         />
         <AppTextInput
@@ -77,9 +78,9 @@ export default function CommentForm({ productID, cancelReview, userCommentTimes 
         <Button variant="outlined" onClick={cancelReview}>
           Cancel
         </Button>
-        <Button variant="contained" type="submit" disabled={userCommentTimes > 2 || rating! < 1 || !formState.isValid}>
+        <LoadingButton loading={formState.isSubmitting} variant="contained" type="submit" disabled={userCommentTimes > 2 || rating! < 1 || !formState.isValid}>
           Submit
-        </Button>
+        </LoadingButton>
       </Stack>
     </form>
   );

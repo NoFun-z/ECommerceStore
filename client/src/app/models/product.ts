@@ -8,6 +8,7 @@ export interface Product {
     brand: string
     quantityInStock?: number
     averageRating: number
+    discount: number
 }
 
 export interface ProductParams{

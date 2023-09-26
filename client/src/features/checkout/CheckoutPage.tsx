@@ -11,6 +11,7 @@ import { useAppDispatch, useAppSelector } from "../../app/store/ConfigureStore";
 import { clearBasket } from "../basket/basketSlice";
 import { StripeElementType } from "@stripe/stripe-js";
 import { CardNumberElement, useElements, useStripe } from "@stripe/react-stripe-js";
+import { LoadingButton } from "@mui/lab";
 
 const steps = ['Shipping address', 'Review your order', 'Payment details'];
 
@@ -168,14 +169,15 @@ export default function CheckoutPage() {
                                         Back
                                     </Button>
                                 )}
-                                <Button
+                                <LoadingButton
+                                    loading={loading}
                                     disabled={submitDisabled()}
                                     variant="contained"
                                     type="submit"
                                     sx={{ mt: 3, ml: 1 }}
                                 >
                                     {activeStep === steps.length - 1 ? 'Place order' : 'Next'}
-                                </Button>
+                                </LoadingButton>
                             </Box>
                         </form>
                     )}

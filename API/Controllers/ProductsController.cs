@@ -1,3 +1,4 @@
+using System.Reflection.Metadata;
 using API.Data;
 using API.DTOs;
 using API.Entities;
@@ -159,11 +160,35 @@ namespace API.Controllers
 
             _mapper.Map(productDTO, product);
 
+            _context.Entry(product).Property(p => p.AverageRating).IsModified = true;
+
             var result = await _context.SaveChangesAsync() > 0;
 
             if (result) return Ok(product);
 
-            return BadRequest(new ProblemDetails { Title = "Problem updating product" });
+            return BadRequest(new ProblemDetails { Title = "Problem updating product rating" });
+        }
+
+        [HttpPut("discount")]
+        public async Task<ActionResult<Product>> UpdateProductDiscount([FromForm] UpdateProductDiscountDTO productDTO)
+        {
+            var product = await _context.Products.FindAsync(productDTO.ID);
+
+            if (product == null) return NotFound();
+
+            _mapper.Map(productDTO, product);
+
+            await _context.Database
+            .ExecuteSqlInterpolatedAsync($@"
+                UPDATE Products
+                SET Discount = 0
+                WHERE ID != {productDTO.ID}");
+
+            var result = await _context.SaveChangesAsync() > 0;
+
+            if (result) return Ok(product);
+
+            return BadRequest(new ProblemDetails { Title = "Problem updating product discount" });
         }
 
         [HttpGet("comments/all")]

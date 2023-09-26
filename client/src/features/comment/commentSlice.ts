@@ -55,7 +55,7 @@ export const commentSlice = createSlice({
     reducers: {
         setProductCommentParams: (state, action) => {
             state.commentsLoaded = false;
-            state.productCommentParams = { ...state.productCommentParams, ...action.payload, pageNumber: 1 };
+            state.productCommentParams = { ...state.productCommentParams, ...action.payload};
         },
         setPageNumber: (state, action) => {
             state.commentsLoaded = false;
