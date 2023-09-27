@@ -1,5 +1,5 @@
 import { Box, Button, Grid, Typography } from "@mui/material";
-import { Order } from "../../app/models/order";
+import { Order, OrderItem } from "../../app/models/order";
 import BasketTable from "../basket/BasketTable";
 import { BasketItem } from "../../app/models/basket";
 import BasketSummary from "../basket/BasketSummary";
@@ -18,7 +18,7 @@ export default function OrderDetailed({ order, setSelectedOrder }: Props) {
                 <Typography sx={{ p: 2 }} gutterBottom variant="h4">Order# {order.id} - {order.orderStatus}</Typography>
                 <Button onClick={() => setSelectedOrder(0)} sx={{ m: 2 }} size="large" variant="contained">Back to orders</Button>
             </Box>
-            <BasketTable items={order.orderItems as BasketItem[]} isBasket={false} />
+            <BasketTable items={order.orderItems as OrderItem[]} isBasket={false} />
             <Grid container>
                 <Grid item xs={6} />
                 <Grid item xs={6}>
