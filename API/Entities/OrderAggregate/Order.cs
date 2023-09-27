@@ -18,7 +18,7 @@ namespace API.Entities.OrderAggregate
 
         public long GetTotal()
         {
-            return Subtotal + (Subtotal / 100 * 15) + DeliveryFee;
+            return Subtotal + DeliveryFee;
         }
     }
 }
