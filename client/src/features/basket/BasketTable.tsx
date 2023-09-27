@@ -4,9 +4,10 @@ import { removeBasketItemAsync, addBasketItemAsync } from "./basketSlice";
 import { BasketItem } from "../../app/models/basket";
 import { useAppSelector, useAppDispatch } from "../../app/store/ConfigureStore";
 import { currencyFormat } from "../../app/util/util";
+import { OrderItem } from "../../app/models/order";
 
 interface Props {
-    items: BasketItem[],
+    items: BasketItem[] | OrderItem[],
     isBasket?: boolean;
 }
 
@@ -57,8 +58,8 @@ export default function BasketTable({ items, isBasket = true }: Props) {
                             </TableCell>
                             <TableCell align="right">
                                 {row.discount > 0
-                                    ? `25%OFF - ${currencyFormat(((row.price - row.discount) + (row.price / 100 * 15)) * row.quantity)}`
-                                    : currencyFormat(((row.price - row.discount) + (row.price / 100 * 15)) * row.quantity)}
+                                    ? `25%OFF - ${currencyFormat(((row.price - row.discount) + ((row.price-row.discount)/100*15)) * row.quantity)}`
+                                    : currencyFormat(((row.price) + (row.price / 100 * 15)) * row.quantity)}
                             </TableCell>
                             {isBasket &&
                                 <TableCell align="right">
