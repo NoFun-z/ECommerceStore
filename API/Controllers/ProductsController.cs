@@ -178,11 +178,23 @@ namespace API.Controllers
 
             _mapper.Map(productDTO, product);
 
-            await _context.Database
-            .ExecuteSqlInterpolatedAsync($@"
-                UPDATE Products
-                SET Discount = 0
-                WHERE ID != {productDTO.ID}");
+            // await _context.Database
+            // .ExecuteSqlInterpolatedAsync($@"
+            //     UPDATE Products
+            //     SET Discount = 0
+            //     WHERE ID != {productDTO.ID}");
+
+            var products = await _context.Products.Where(p => p.ID != productDTO.ID).ToListAsync();
+            foreach (var prod in products)
+            {
+                UpdateProductDiscountDTO prodDTO = new UpdateProductDiscountDTO
+                {
+                    ID = prod.ID,
+                    Discount = 0
+                };
+
+                _mapper.Map(prodDTO, prod);
+            }
 
             var result = await _context.SaveChangesAsync() > 0;
 
