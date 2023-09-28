@@ -71,7 +71,7 @@ export default function HomeStrategy() {
             </Grid>
 
             {/* Plan Details Section */}
-            {showPlanDetails && (
+            <div className={showPlanDetails ? "planDetailsexpanded" : "planDetailshidden"}>
                 <Box
                     sx={{
                         backgroundColor: "rgba(255, 255, 255, 0.9)",
@@ -82,38 +82,32 @@ export default function HomeStrategy() {
                     <Typography variant="h4" sx={{ fontSize: "1.8rem", marginBottom: "1rem", color: "#333" }}>
                         Plan Details
                     </Typography>
-                    <ul>
-                        <li>
-                            <Typography sx={{ fontSize: "1.5rem", marginBottom: "0.5rem", color: "#333" }}>
-                                <strong>Basic Plan:</strong> The Basic Plan is ideal for startups and small businesses.
-                                It includes website design and development, social media setup, email marketing, and basic SEO.
-                                This plan is designed to establish your online presence and attract your target audience.
-                            </Typography>
-                        </li>
-                        <li>
-                            <Typography sx={{ fontSize: "1.5rem", marginBottom: "0.5rem", color: "#333" }}>
-                                <strong>Premium Plan:</strong> Our Premium Plan is tailored for growing businesses.
-                                It offers advanced features such as personalized marketing campaigns, SEO optimization,
-                                and social media advertising. With the Premium Plan, you'll have access to detailed analytics
-                                and customer segmentation tools to drive sales and expand your reach.
-                            </Typography>
-                        </li>
-                        <li>
-                            <Typography sx={{ fontSize: "1.5rem", marginBottom: "0.5rem", color: "#333" }}>
-                                <strong>Enterprise Plan:</strong> The Enterprise Plan is designed for large enterprises with
-                                specific marketing needs. It provides custom solutions, dedicated support, and advanced
-                                analytics. With A/B testing and 24/7 customer support, the Enterprise Plan ensures your
-                                marketing strategies are optimized for success in a competitive market.
-                            </Typography>
-                        </li>
-                    </ul>
-                </Box>
-            )}
 
+                    <Typography sx={{ fontSize: "1.5rem", marginBottom: "0.5rem", color: "#333" }}>
+                        <strong>Basic Plan:</strong> The Basic Plan is ideal for startups and small businesses.
+                        It includes website design and development, social media setup, email marketing, and basic SEO.
+                        This plan is designed to establish your online presence and attract your target audience.
+                    </Typography>
+
+                    <Typography sx={{ fontSize: "1.5rem", marginBottom: "0.5rem", color: "#333" }}>
+                        <strong>Premium Plan:</strong> Our Premium Plan is tailored for growing businesses.
+                        It offers advanced features such as personalized marketing campaigns, SEO optimization,
+                        and social media advertising. With the Premium Plan, you'll have access to detailed analytics
+                        and customer segmentation tools to drive sales and expand your reach.
+                    </Typography>
+
+                    <Typography sx={{ fontSize: "1.5rem", marginBottom: "0.5rem", color: "#333" }}>
+                        <strong>Enterprise Plan:</strong> The Enterprise Plan is designed for large enterprises with
+                        specific marketing needs. It provides custom solutions, dedicated support, and advanced
+                        analytics. With A/B testing and 24/7 customer support, the Enterprise Plan ensures your
+                        marketing strategies are optimized for success in a competitive market.
+                    </Typography>
+                </Box>
+            </div>
             <Button
                 variant="contained"
                 color="primary"
-                style={{ marginTop: "2rem" }}
+                style={{ marginTop: "3rem" }}
                 onClick={togglePlanDetails}
             >
                 {showPlanDetails ? "Hide Details" : "Learn More"}

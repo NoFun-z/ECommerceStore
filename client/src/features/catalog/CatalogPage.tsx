@@ -29,7 +29,6 @@ export default function Catalog() {
   const handlePageChange = (page: number) => {
     setCurrentPage(page); // Update the current page
     dispatch(setPageNumber({ pageNumber: page }));
-    console.log(currentPage);
   };
 
   useEffect(() => {

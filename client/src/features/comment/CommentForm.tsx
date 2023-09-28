@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { ProductRating } from '../../app/models/productRating';
-import { setComments } from './commentSlice';
+import { fetchCommentsAsync, setComments } from './commentSlice';
 import { Comment } from '../../app/models/comment';
 import { useAppDispatch, useAppSelector } from '../../app/store/ConfigureStore';
 import { FieldValues, useForm } from 'react-hook-form';
@@ -42,6 +42,7 @@ export default function CommentForm({ productID, cancelReview, userCommentTimes 
       commentResponse = await agent.Comments.createComment(newComment);
       dispatch(setProduct(response));
       dispatch(setComments(commentResponse));
+      dispatch(fetchCommentsAsync());
       cancelReview();
     } catch (er) {
       console.log(er);

@@ -32,7 +32,7 @@ import CommentRating from "../comment/CommentRating";
 import { Product } from "../../app/models/product";
 import agent from "../../app/api/agent";
 import ProductCardSkeleton from "./ProductCardSkeleton";
-import { commentSelector, fetchCommentsAsync, setProductCommentParams } from "../comment/commentSlice";
+import { commentSelector, fetchCommentsAsync, setPageNumber, setProductCommentParams } from "../comment/commentSlice";
 import { Comment } from "../../app/models/comment";
 import { currencyFormat } from "../../app/util/util";
 import { LoadingButton } from "@mui/lab";
@@ -52,7 +52,7 @@ export default function ProductDetails() {
     const [products, setProducts] = useState<Product[]>([]);
     const [loading, setLoading] = useState(false);
     const comments = useAppSelector(commentSelector.selectAll).slice(0, 20);
-    const { metaData } = useAppSelector((state) => state.comment);
+    useAppSelector((state) => state.comment);
     const [allComments, setAllComments] = useState<Comment[]>([])
     const [previousProduct, setPreviousProduct] = useState<Product>();
     const user = useAppSelector(state => state.account);
@@ -98,12 +98,12 @@ export default function ProductDetails() {
     }, [item]);
 
     useEffect(() => {
-        if (product && id && product.id !== previousProduct?.id) {
-            dispatch(setProductCommentParams({ productID: product.id }));
+        if (product && id && product.id != previousProduct?.id) {
+            dispatch(setProductCommentParams({ productID: product.id, pageNumber: 1 }));
             dispatch(fetchCommentsAsync());
             setPreviousProduct(product);
         }
-    }, [dispatch, user, product, metaData]);
+    }, [dispatch, user, product]);
 
     function handleInputChange(event: React.ChangeEvent<HTMLInputElement>) {
         const inputValue = parseInt(event.target.value, 10);

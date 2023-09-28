@@ -14,14 +14,33 @@
 /* styles.css (or your preferred stylesheet) */
 
 /* Initially hide comments with opacity 0 */
-.all-comments,
+.comments {
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+}
+
 .personal-comments {
   opacity: 0;
   transition: opacity 0.5s ease-in-out;
 }
 
 /* Fade in when visible */
-.all-comments.fade-in,
-.personal-comments.fade-in {
+.comments.fade-in {
   opacity: 1;
+}
+
+.personal-comments.personal-fade-in {
+  opacity: 1;
+}
+
+.planDetailsexpanded{
+  max-height: 800px;
+  transition: max-height 0.5s ease-in-out;
+  overflow: hidden;
+}
+
+.planDetailshidden {
+  max-height: 0;
+  transition: max-height 0.5s ease-in;
+  overflow: hidden;
 }

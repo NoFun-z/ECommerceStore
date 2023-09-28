@@ -21,7 +21,6 @@ export default function CommentSection({ productComment, cmtBool, setCmtBool, co
 
     let commentText = cmtBool ? "Your Reviews" : "Top Reviews"
     const personalReviews = comments.filter(c => c.buyerID === user?.userName && c.productID === product.id);
-    const commentListClass = cmtBool ? "personal-comments" : "all-comments";
 
     const [fadeIn, setFadeIn] = useState(false);
 
@@ -47,7 +46,7 @@ export default function CommentSection({ productComment, cmtBool, setCmtBool, co
                     {!cmtBool ? "No comments available" : "Add your first thoughts about the product"}
                 </Typography>
             ) : (
-                <div className={`${commentListClass} ${fadeIn ? 'fade-in' : ''}`}>
+                <div className={`comments ${fadeIn ? 'fade-in' : ''}`}>
                     {(cmtBool ? personalReviews : productComment).map((comment, index) => (
                         <Paper key={index} elevation={3} sx={{ p: 2, mb: 1.5 }}>
                             <Box alignItems="center">

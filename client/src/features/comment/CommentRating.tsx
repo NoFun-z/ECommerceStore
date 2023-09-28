@@ -8,7 +8,7 @@ import { Comment } from '../../app/models/comment';
 import { useAppDispatch, useAppSelector } from '../../app/store/ConfigureStore';
 import { Link } from 'react-router-dom';
 import AppPagination from '../../app/components/AppPagination';
-import { setPageNumber } from './commentSlice';
+import { fetchCommentsAsync, setPageNumber } from './commentSlice';
 
 interface Props {
   product: Product
@@ -22,7 +22,6 @@ export default function CommentRating({ product, allcomments, comments}: Props) 
   const dispatch = useAppDispatch();
   const [cmtBool, setCmtBool] = useState(false)
   const { metaData } = useAppSelector((state) => state.comment);
-  const [currentPage, setCurrentPage] = useState(1); // Maintain current page separately
 
   function handleSetCmtBool() {
     setCmtBool(!cmtBool);
@@ -31,12 +30,12 @@ export default function CommentRating({ product, allcomments, comments}: Props) 
   const userCommentTimes = allcomments?.filter(c => c.buyerID === user?.userName &&
      c.productID === product?.id).length;
 
-  const totalRatings = comments?.length ?? 0;
-  const numberOfFiveStarRatings = comments.filter(c => c.rating === 5).length ?? 0;
-  const numberOfFourStarRatings = comments.filter(c => c.rating === 4).length ?? 0;
-  const numberOfThreeStarRatings = comments.filter(c => c.rating === 3).length ?? 0;
-  const numberOfTwoStarRatings = comments.filter(c => c.rating === 2).length ?? 0;
-  const numberOfOneStarRatings = comments.filter(c => c.rating === 1).length ?? 0;
+  const totalRatings = allcomments?.filter(ac => ac.productID === product.id).length ?? 0;
+  const numberOfFiveStarRatings = allcomments.filter(c => c.productID === product.id && c.rating === 5).length ?? 0;
+  const numberOfFourStarRatings = allcomments.filter(c => c.productID === product.id && c.rating === 4).length ?? 0;
+  const numberOfThreeStarRatings = allcomments.filter(c => c.productID === product.id && c.rating === 3).length ?? 0;
+  const numberOfTwoStarRatings = allcomments.filter(c => c.productID === product.id && c.rating === 2).length ?? 0;
+  const numberOfOneStarRatings = allcomments.filter(c => c.productID === product.id && c.rating === 1).length ?? 0;
 
   const ratings = [
     { star: 5, count: numberOfFiveStarRatings },
@@ -47,23 +46,12 @@ export default function CommentRating({ product, allcomments, comments}: Props) 
   ];
 
   const handlePageChange = (page: number) => {
-    setCurrentPage(page); // Update the current page
     dispatch(setPageNumber({ pageNumber: page }));
+    dispatch(fetchCommentsAsync());
   };
-
-  useEffect(() => {
-    setCurrentPage(1);
-  }, [comments]);
-
   function CancelReviewForm() {
     setShowReview(false);
   }
-
-  // Calculate the start and end indexes of products for the current page
-  const pageSize = 5;
-  const startIndex = (currentPage - 1) * pageSize;
-  const endIndex = startIndex + pageSize;
-  const displayedComments = comments.slice(startIndex, endIndex);
 
   return (
     <Grid container spacing={5.5} sx={{ mb: '50px' }}>
@@ -93,7 +81,7 @@ export default function CommentRating({ product, allcomments, comments}: Props) 
             "Only 3 Reviews Allowed" : "Write a customer review"}</Button>
       </Grid>
       <Grid item xs={12} sm={12} md={8}>
-        {!showReview ? <CommentSection productComment={displayedComments} cmtBool={cmtBool} 
+        {!showReview ? <CommentSection productComment={comments} cmtBool={cmtBool} 
         setCmtBool={handleSetCmtBool} comments={allcomments} product={product} />
           : user ? <CommentForm productID={product.id} cancelReview={CancelReviewForm}
            userCommentTimes={userCommentTimes} />
